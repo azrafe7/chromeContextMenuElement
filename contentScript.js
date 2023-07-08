@@ -30,8 +30,7 @@
     }
   }
   
-  document.addEventListener("mouseover", onMouseEvent, true);
-  document.addEventListener("mouseout", onMouseEvent, true);
+  document.addEventListener("mousemove", onMouseEvent, true);
 
   function findTargetsAt(x, y) {
     var elementsAtPoint = document.elementsFromPoint(x, y);
