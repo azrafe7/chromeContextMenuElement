@@ -7,7 +7,7 @@
   let currTarget = null;
   let currTargets = [];
 
-  document.addEventListener("mousedown", function(event){
+  function onMouseEvent(event) {
     clientPos = {
       x: event.clientX,
       y: event.clientY,
@@ -28,7 +28,10 @@
       console.log(`[${EXTENSION_NAME}:CTX] filtered:`, currTarget);
       chrome.runtime.sendMessage({event: 'element', data: currTarget?.outerHTML});
     }
-  }, true);
+  }
+  
+  document.addEventListener("mouseover", onMouseEvent, true);
+  document.addEventListener("mouseout", onMouseEvent, true);
 
   function findTargetsAt(x, y) {
     var elementsAtPoint = document.elementsFromPoint(x, y);
