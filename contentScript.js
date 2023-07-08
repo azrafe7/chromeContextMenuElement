@@ -7,7 +7,7 @@
   let currTarget = null;
   let currTargets = [];
 
-  document.addEventListener("contextmenu", function(event){
+  document.addEventListener("mousedown", function(event){
     clientPos = {
       x: event.clientX,
       y: event.clientY,
