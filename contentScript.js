@@ -36,7 +36,6 @@
     }
   }
   
-  document.addEventListener("mousemove", onMouseEvent, true);
   document.addEventListener("mousedown", onMouseEvent, true);
 
   function findTargetsAt(x, y) {
