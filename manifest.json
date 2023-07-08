@@ -1,0 +1,42 @@
+{
+  "name": "ContextMenuElement",
+  "version": "0.1.0",
+  "description": "Get ContextMenuElement",
+  "manifest_version": 3,
+  "permissions": ["storage", "tabs", "contextMenus", "scripting"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["contentScript.js"]
+    }
+  ],
+  "cross_origin_opener_policy": {
+    "value": "same-origin"
+  },
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "assets/bookmark.png",
+        "assets/play.png",
+        "assets/delete.png",
+        "assets/save.png"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "icons": {
+    "128": "assets/icon128.png"
+  },
+  "action": {
+    "default_icon": {
+      "128": "assets/icon128.png"
+    },
+    "default_title": "ContextMenuElement"
+  }
+}
