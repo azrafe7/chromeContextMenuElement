@@ -13,24 +13,31 @@
       y: event.clientY,
     }
 
+    if (clickedElement == event.target) {
+      // console.log(`[${EXTENSION_NAME}:CTX] return early`, clickedElement);
+      return;
+    }
+    
     clickedElement = event.target;
-    console.log(`[${EXTENSION_NAME}:CTX] clicked:`, clickedElement);
+    // console.log(`[${EXTENSION_NAME}:CTX] clicked:`, clickedElement);
 
     //console.log([event.which, event.target]);
     currTarget = event.target;
     currTargets = findTargetsAt(clientPos.x, clientPos.y);
+    // console.log(`[${EXTENSION_NAME}:CTX] sorted:`, currTargets);
     if (currTargets) {
       imgOrVideos = currTargets.filter((element) => {
         const tag = element.tagName.toUpperCase();
         return tag === 'VIDEO' || tag === 'IMG';
       });
       currTarget = imgOrVideos ? imgOrVideos[0] : null;
-      console.log(`[${EXTENSION_NAME}:CTX] filtered:`, currTarget);
+      // console.log(`[${EXTENSION_NAME}:CTX] filtered:`, currTarget);
       chrome.runtime.sendMessage({event: 'element', data: currTarget?.outerHTML});
     }
   }
   
   document.addEventListener("mousemove", onMouseEvent, true);
+  document.addEventListener("mousedown", onMouseEvent, true);
 
   function findTargetsAt(x, y) {
     var elementsAtPoint = document.elementsFromPoint(x, y);
@@ -49,7 +56,6 @@
     }
 
     var sortedTargets = [].concat(videos).concat(images).concat(others)
-    console.log(`[${EXTENSION_NAME}:CTX] sorted:`, sortedTargets);
     return sortedTargets;
   }
 
